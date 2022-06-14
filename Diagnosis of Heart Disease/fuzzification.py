@@ -58,13 +58,59 @@ def updating_membership_functions(fuzzy_sets: dict) -> dict:
         lambda x: (x > 154 and (x < 171 and (x - 154) / 17 or 1)) or 0
     )
     
-    x = np.arange(0, 200, 0.1)
-    plt.plot(x, [fuzzy_sets['bloodpressure_veryhigh'].get_membership_value(i) for i in x])
-    plt.show()
+    fuzzy_sets['bloodsugar_veryhigh'].set_membership(
+        lambda x: (x > 105 and (x < 120 and (x - 105) / 15 or 1)) or 0
+    )
+    
+    fuzzy_sets['cholesterol_low'].set_membership(
+        lambda x: (x < 197 and (x < 151 and 1 or (197 - x) / 46)) or 0
+    )
+    fuzzy_sets['cholesterol_medium'].set_membership(
+        lambda x: (x < 250 and ((x > 215 and (250 - x) / 35) or (x > 188 and (x - 188) / 27) or 0)) or 0
+    )
+    fuzzy_sets['cholesterol_high'].set_membership(
+        lambda x: (x < 307 and ((x > 263 and (307 - x) / 44) or (x > 217 and (x - 217) / 46) or 0)) or 0
+    )
+    fuzzy_sets['cholesterol_veryhigh'].set_membership(
+        lambda x: (x > 281 and (x < 347 and (x - 281) / 66 or 1)) or 0
+    )
+    
+    fuzzy_sets['heartrate_low'].set_membership(
+        lambda x: (x < 141 and (x < 100 and 1 or (141 - x) / 41)) or 0
+    )
+    fuzzy_sets['heartrate_medium'].set_membership(
+        lambda x: (x < 194 and ((x > 152 and (194 - x) / 42) or (x > 111 and (x - 111) / 41) or 0)) or 0
+    )
+    fuzzy_sets['heartrate_high'].set_membership(
+        lambda x: (x > 152 and (x < 210 and (x - 152) / 58 or 1)) or 0
+    )
+    
+    fuzzy_sets['ecg_normal'].set_membership(
+        lambda x: (x < 0.4 and (x < 0 and 1 or (0.4 - x) / 0.4)) or 0
+    )
+    fuzzy_sets['ecg_abnormal'].set_membership(
+        lambda x: (x < 1.8 and ((x > 1 and (1.8 - x) / 0.8) or (x > 0.2 and (x - 0.2) / 0.8) or 0)) or 0
+    )
+    fuzzy_sets['ecg_hypertrophy'].set_membership(
+        lambda x: (x > 1.4 and (x < 1.9 and (x - 1.4) / 0.5 or 1)) or 0
+    )
+    
+    fuzzy_sets['oldpeak_low'].set_membership(
+        lambda x: (x < 2 and (x < 1 and 1 or 2 - x)) or 0
+    )
+    fuzzy_sets['oldpeak_risk'].set_membership(
+        lambda x: (x < 4.2 and ((x > 2.8 and (4.2 - x) / 1.4) or (x > 1.5 and (x - 1.5) / 1.3) or 0)) or 0
+    )
+    fuzzy_sets['oldpeak_terrible'].set_membership(
+        lambda x: (x > 2.5 and (x < 4 and (x - 2.5) / 1.5 or 1)) or 0
+    )
+    
+    return fuzzy_sets
     
  
 params = read_parameters()
 fuzzy_parameters = create_fuzzy_sets(params)
 crisp_parameters = create_crisp_sets(params)
-updating_membership_functions(fuzzy_parameters)
+
+fuzzy_sets = updating_membership_functions(fuzzy_parameters)
 
