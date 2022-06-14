@@ -1,0 +1,46 @@
+{
+    "sex": {
+        "type": "crisp",
+        "enum": []
+    },
+    "exercise": {
+        "type": "crisp",
+        "enum": []
+    },
+    "chest_pain": {
+        "type": "crisp",
+        "enum": ["typical angina", "atypical angina", "non-angina pain", "asymptomatic"]
+    },
+    "blood_pressure": {
+        "type": "fuzzy",
+        "enum": ["low", "medium", "high", "very_high"]
+    },
+    "cholesterol": {
+        "type": "fuzzy",
+        "enum": ["low", "medium", "high", "very_high"]
+    },
+    "blood_sugar": {
+        "type": "fuzzy",
+        "enum": ["very_high"]
+    },
+    "ecg": {
+        "type": "fuzzy",
+        "enum": ["normal", "abnormal", "hypertrophy"]
+    },
+    "old_peak": {
+        "type": "fuzzy",
+        "enum": ["low", "risk", "terrible"]
+    },
+    "heart_rate": {
+        "type": "fuzzy",
+        "enum": ["low", "medium", "high"]
+    },
+    "age": {
+        "type": "fuzzy",
+        "enum": ["young", "mild", "old", "very_old"]
+    },
+    "thallium_scan": {
+        "type": "crisp",
+        "enum": ["normal", "medium", "high"]
+    }
+}
