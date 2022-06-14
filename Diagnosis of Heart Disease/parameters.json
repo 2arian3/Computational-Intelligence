@@ -42,5 +42,9 @@
     "thallium_scan": {
         "type": "crisp",
         "enum": ["normal", "medium", "high"]
+    },
+    "output": {
+        "type": "fuzzy",
+        "enum": ["sick1", "sick2", "sick3", "sick4", "healthy"]
     }
 }

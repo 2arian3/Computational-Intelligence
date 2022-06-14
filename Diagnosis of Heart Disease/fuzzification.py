@@ -105,6 +105,22 @@ def updating_membership_functions(fuzzy_sets: dict) -> dict:
         lambda x: (x > 2.5 and (x < 4 and (x - 2.5) / 1.5 or 1)) or 0
     )
     
+    fuzzy_sets['output_healthy'].set_membership(
+        lambda x: (x < 1 and (x < 0.25 and 1 or (1 - x) / 0.75)) or 0
+    )
+    fuzzy_sets['output_sick1'].set_membership(
+        lambda x: (x < 2 and ((x > 1 and 2 - x) or (x > 0 and x) or 0)) or 0
+    )
+    fuzzy_sets['output_sick2'].set_membership(
+        lambda x: (x < 3 and ((x > 2 and 3 - x) or (x > 1 and x - 1) or 0)) or 0
+    )
+    fuzzy_sets['output_sick3'].set_membership(
+        lambda x: (x < 4 and ((x > 3 and 4 - x) or (x > 2 and x - 2) or 0)) or 0
+    )
+    fuzzy_sets['output_sick4'].set_membership(
+        lambda x: (x > 3 and (x < 3.75 and (x - 3) / 0.75 or 1)) or 0
+    )
+    
     return fuzzy_sets
     
  
