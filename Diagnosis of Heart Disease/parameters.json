@@ -1,43 +1,43 @@
 {
     "sex": {
         "type": "crisp",
-        "enum": []
+        "enum": ["male", "female"]
     },
     "exercise": {
         "type": "crisp",
-        "enum": []
+        "enum": ["no exercise", "exersice"]
     },
-    "chest_pain": {
+    "chestpain": {
         "type": "crisp",
         "enum": ["typical angina", "atypical angina", "non-angina pain", "asymptomatic"]
     },
-    "blood_pressure": {
+    "bloodpressure": {
         "type": "fuzzy",
-        "enum": ["low", "medium", "high", "very_high"]
+        "enum": ["low", "medium", "high", "veryhigh"]
     },
     "cholesterol": {
         "type": "fuzzy",
-        "enum": ["low", "medium", "high", "very_high"]
+        "enum": ["low", "medium", "high", "veryhigh"]
     },
-    "blood_sugar": {
+    "bloodsugar": {
         "type": "fuzzy",
-        "enum": ["very_high"]
+        "enum": ["veryhigh"]
     },
     "ecg": {
         "type": "fuzzy",
         "enum": ["normal", "abnormal", "hypertrophy"]
     },
-    "old_peak": {
+    "oldpeak": {
         "type": "fuzzy",
         "enum": ["low", "risk", "terrible"]
     },
-    "heart_rate": {
+    "heartrate": {
         "type": "fuzzy",
         "enum": ["low", "medium", "high"]
     },
     "age": {
         "type": "fuzzy",
-        "enum": ["young", "mild", "old", "very_old"]
+        "enum": ["young", "mild", "old", "veryold"]
     },
     "thallium_scan": {
         "type": "crisp",
