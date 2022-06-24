@@ -7,37 +7,154 @@
         "type": "crisp",
         "enum": ["no exercise", "exersice"]
     },
-    "chestpain": {
+    "chest_pain": {
         "type": "crisp",
         "enum": ["typical angina", "atypical angina", "non-angina pain", "asymptomatic"]
     },
-    "bloodpressure": {
+    "blood_pressure": {
         "type": "fuzzy",
-        "enum": ["low", "medium", "high", "veryhigh"]
+        "enum": {
+            "low": {
+                "x1": 111,
+                "x2": 134,
+                "isAscending": false
+            },
+            "medium": {
+                "x1": 127,
+                "x2": 139,
+                "x3": 153
+            },
+            "high": {
+                "x1": 142,
+                "x2": 157,
+                "x3": 172
+            },
+            "veryhigh": {
+                "x1": 154,
+                "x2": 171,
+                "isAscending": true
+            }
+        }
     },
     "cholesterol": {
         "type": "fuzzy",
-        "enum": ["low", "medium", "high", "veryhigh"]
+        "enum": {
+            "low": {
+                "x1": 151,
+                "x2": 197,
+                "isAscending": false
+            },
+            "medium": {
+                "x1": 188,
+                "x2": 215,
+                "x3": 250
+            },
+            "high": {
+                "x1": 217,
+                "x2": 263,
+                "x3": 307
+            },
+            "veryhigh": {
+                "x1": 281,
+                "x2": 347,
+                "isAscending": true
+            }
+        }
     },
-    "bloodsugar": {
+    "blood_sugar": {
         "type": "fuzzy",
-        "enum": ["veryhigh"]
+        "enum": {
+            "veryhigh": {
+                "x1": 105,
+                "x2": 120,
+                "isAscending": true
+            }
+        }
     },
     "ecg": {
         "type": "fuzzy",
-        "enum": ["normal", "abnormal", "hypertrophy"]
+        "enum": {
+            "normal": {
+                "x1": 0,
+                "x2": 0.4,
+                "isAscending": false
+            },
+            "abnormal": {
+                "x1": 0.2,
+                "x2": 1,
+                "x3": 1.8
+            },
+            "hypertrophy": {
+                "x1": 1.4,
+                "x2": 1.9,
+                "isAscending": true
+            }
+        }
     },
-    "oldpeak": {
+    "old_peak": {
         "type": "fuzzy",
-        "enum": ["low", "risk", "terrible"]
+        "enum": {
+            "low": {
+                "x1": 1,
+                "x2": 2,
+                "isAscending": false
+            },
+            "risk": {
+                "x1": 1.5,
+                "x2": 2.8,
+                "x3": 4.2
+            },
+            "terrible": {
+                "x1": 2.5,
+                "x2": 4,
+                "isAscending": true
+            }
+        }
     },
-    "heartrate": {
+    "maximum_heart_rate": {
         "type": "fuzzy",
-        "enum": ["low", "medium", "high"]
+        "enum": {
+            "low": {
+                "x1": 100,
+                "x2": 141,
+                "isAscending": false
+            },
+            "medium": {
+                "x1": 111,
+                "x2": 152,
+                "x3": 194
+            },
+            "high": {
+                "x1": 152,
+                "x2": 210,
+                "isAscending": true
+            }
+        }
     },
     "age": {
         "type": "fuzzy",
-        "enum": ["young", "mild", "old", "veryold"]
+        "enum": {
+            "young": {
+                "x1": 29,
+                "x2": 38,
+                "isAscending": false
+            },
+            "mild": {
+                "x1": 33,
+                "x2": 38,
+                "x3": 45
+            },
+            "old": {
+                "x1": 40,
+                "x2": 48,
+                "x3": 58
+            },
+            "veryold": {
+                "x1": 52,
+                "x2": 60,
+                "isAscending": true
+            }
+        }
     },
     "thallium_scan": {
         "type": "crisp",
@@ -45,6 +162,32 @@
     },
     "output": {
         "type": "fuzzy",
-        "enum": ["sick1", "sick2", "sick3", "sick4", "healthy"]
+        "enum": {
+            "sick1": {
+                "x1": 0,
+                "x2": 1,
+                "x3": 2
+            },
+            "sick2": {
+                "x1": 1,
+                "x2": 2,
+                "x3": 3
+            },
+            "sick3": {
+                "x1": 2,
+                "x2": 3,
+                "x3": 4
+            },
+            "sick4": {
+                "x1": 3,
+                "x2": 3.75,
+                "isAscending": true
+            },
+            "healthy": {
+                "x1": 0.25,
+                "x2": 1,
+                "isAscending": false
+            }
+        }
     }
 }
