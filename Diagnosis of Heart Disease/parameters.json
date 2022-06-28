@@ -1,15 +1,15 @@
 {
     "sex": {
         "type": "crisp",
-        "enum": ["male", "female"]
+        "enum": {"0" :"male", "1": "female"}
     },
     "exercise": {
         "type": "crisp",
-        "enum": ["no exercise", "exersice"]
+        "enum": {"0": "false", "1": "true"}
     },
     "chest_pain": {
         "type": "crisp",
-        "enum": ["typical angina", "atypical angina", "non-angina pain", "asymptomatic"]
+        "enum": {"1": "typical_angina", "2": "atypical_angina", "3": "non_angina_pain", "4" :"asymptomatic"}
     },
     "blood_pressure": {
         "type": "fuzzy",
@@ -29,7 +29,7 @@
                 "x2": 157,
                 "x3": 172
             },
-            "veryhigh": {
+            "very_high": {
                 "x1": 154,
                 "x2": 171,
                 "isAscending": true
@@ -54,7 +54,7 @@
                 "x2": 263,
                 "x3": 307
             },
-            "veryhigh": {
+            "very_high": {
                 "x1": 281,
                 "x2": 347,
                 "isAscending": true
@@ -64,10 +64,15 @@
     "blood_sugar": {
         "type": "fuzzy",
         "enum": {
-            "veryhigh": {
-                "x1": 105,
-                "x2": 120,
-                "isAscending": true
+            "true": {
+                "x": 120,
+                "isAscending": true,
+                "isStepFunction": true
+            },
+            "false": {
+                "x": 120,
+                "isAscending": false,
+                "isStepFunction": true
             }
         }
     },
@@ -111,7 +116,7 @@
             }
         }
     },
-    "maximum_heart_rate": {
+    "heart_rate": {
         "type": "fuzzy",
         "enum": {
             "low": {
@@ -149,7 +154,7 @@
                 "x2": 48,
                 "x3": 58
             },
-            "veryold": {
+            "very_old": {
                 "x1": 52,
                 "x2": 60,
                 "isAscending": true
@@ -158,27 +163,27 @@
     },
     "thallium_scan": {
         "type": "crisp",
-        "enum": ["normal", "medium", "high"]
+        "enum": {"3": "normal", "4": "normal", "5": "normal", "6": "medium", "7": "high"}
     },
     "output": {
         "type": "fuzzy",
         "enum": {
-            "sick1": {
+            "sick_1": {
                 "x1": 0,
                 "x2": 1,
                 "x3": 2
             },
-            "sick2": {
+            "sick_2": {
                 "x1": 1,
                 "x2": 2,
                 "x3": 3
             },
-            "sick3": {
+            "sick_3": {
                 "x1": 2,
                 "x2": 3,
                 "x3": 4
             },
-            "sick4": {
+            "sick_4": {
                 "x1": 3,
                 "x2": 3.75,
                 "isAscending": true

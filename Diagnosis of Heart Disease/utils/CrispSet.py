@@ -2,7 +2,7 @@ class CrispSet:
 
     def __init__(self, name, values=None):
         if values is None:
-            values = []
+            values = {}
         self.name = name
         self.values = values
 
