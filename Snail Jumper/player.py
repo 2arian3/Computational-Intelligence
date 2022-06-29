@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
         if self.game_mode == "Neuroevolution":
             self.fitness = 0  # Initial fitness
 
-            layer_sizes = [self.obstacles_number_selcted + 1, 10, 6, 2]
+            layer_sizes = [self.obstacles_number_selcted + 1, 16, 8, 2]
             self.nn = NeuralNetwork(layer_sizes)
 
     def think(self, screen_width, screen_height, obstacles, player_x, player_y):

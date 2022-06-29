@@ -1,6 +1,7 @@
 import copy
 import random
 import numpy as np
+import pickle
 
 from player import Player
 
@@ -19,9 +20,10 @@ class Evolution:
         :param num_players: number of players that we return
         """
         next_population = players[:num_players]
-        next_population = self.stochastic_universal_sampling(players, num_players)
+        next_population = self.roulette_wheel_selection(players, num_players)
+        
+        self.update_learning_curve(players)
 
-        # TODO (Additional: Learning curve)
         return next_population
 
     def generate_new_population(self, num_players, prev_players=None):
@@ -65,7 +67,7 @@ class Evolution:
         """
         selected_players = []
         fits = list(np.cumsum(list(map(lambda i: i.fitness, players))))
-        for i in range(k):
+        for _ in range(k):
             random_number = np.random.random() * fits[-1]
             index = fits.index(next(i for i in fits if random_number <= i))
             selected_players.append(players[index])
@@ -100,11 +102,23 @@ class Evolution:
             selected_players.append(max)
         return selected_players
     
-    def learning_curve(self, players, k):
-        """
-        Gets a list of players and returns the top k players.
-        """
-        pass
+    def update_learning_curve(self, players):
+        fitnesses = list(map(lambda i: i.fitness, players))
+        
+        result = []
+        try:
+            with open('learning_curve', 'rb') as f:
+                result = pickle.load(f)
+        except:
+            pass
+
+        maximum_fitness = np.max(fitnesses)
+        minimum_fitness = np.min(fitnesses)
+        average_fitness = np.average(fitnesses)
+        
+        with open('learning_curve', 'wb') as f:
+            result.append([maximum_fitness, average_fitness, minimum_fitness])
+            pickle.dump(result, f)
     
     def crossover(self, parent1, parent2):
         child1 = self.clone_player(parent1)
@@ -124,14 +138,14 @@ class Evolution:
             child2.nn.weights[i] = layer4
         
         for j in range(nn_biases_number):
-            layer1 = parent1.nn.biases[i]
-            layer2 = parent2.nn.biases[i]
+            layer1 = parent1.nn.biases[j]
+            layer2 = parent2.nn.biases[j]
             length = len(layer1) * len(layer1[0])
             index = round(np.random.random() * length)
             layer3 = np.array(list(layer1.reshape(length)[:index]) + list(layer2.reshape(length)[index:])).reshape([len(layer1), len(layer1[0])])
             layer4 = np.array(list(layer2.reshape(length)[:index]) + list(layer1.reshape(length)[index:])).reshape([len(layer1), len(layer1[0])])
-            child1.nn.biases[i] = layer3
-            child2.nn.biases[i] = layer4
+            child1.nn.biases[j] = layer3
+            child2.nn.biases[j] = layer4
         
         return child1, child2
     

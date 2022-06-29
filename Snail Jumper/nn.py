@@ -32,7 +32,7 @@ class NeuralNetwork:
         """
         return NeuralNetwork.ACTIVATION_FUNCTIONS[function_type.lower()](x)
 
-    def forward(self, x, activation_function_type='relu'):
+    def forward(self, x, activation_function_type='sigmoid'):
         """
         Receives input vector as a parameter and calculates the output vector based on weights and biases.
         :param x: Input vector which is a numpy array.
