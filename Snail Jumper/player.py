@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 import pygame
 from variables import global_variables
@@ -31,11 +32,12 @@ class Player(pygame.sprite.Sprite):
         self.player_gravity = 'left'
         self.gravity = 10
         self.game_mode = game_mode
+        self.obstacles_number_selcted = 3
 
         if self.game_mode == "Neuroevolution":
             self.fitness = 0  # Initial fitness
 
-            layer_sizes = [3, 10, 2]  # TODO (Design your architecture here by changing the values)
+            layer_sizes = [self.obstacles_number_selcted + 1, 10, 6, 2]
             self.nn = NeuralNetwork(layer_sizes)
 
     def think(self, screen_width, screen_height, obstacles, player_x, player_y):
@@ -51,10 +53,10 @@ class Player(pygame.sprite.Sprite):
         :param player_x: 'x' position of the player
         :param player_y: 'y' position of the player
         """
-        # TODO (change player's gravity here by calling self.change_gravity)
-
-        # This is a test code that changes the gravity based on a random number. Remove it before your implementation.
-        if random.randint(0, 2):
+        neural_network_input = np.append([player_x], self.get_number_of_obstacles(obstacles))
+        neural_network_output = self.nn.forward(neural_network_input)
+        # Selecting left or right based on nn output.
+        if np.argmax(neural_network_output) == 0:
             self.change_gravity('left')
         else:
             self.change_gravity('right')
@@ -69,6 +71,25 @@ class Player(pygame.sprite.Sprite):
         if new_gravity != self.player_gravity:
             self.player_gravity = new_gravity
             self.flip_player_horizontally()
+
+    def get_number_of_obstacles(self, obstacles):
+        left_obstacles = 0
+        middle_obstacles = 0
+        right_obstacles = 0
+        obstacles = list(filter(lambda d: d['y'] < 640, obstacles))
+        if len(obstacles) < self.obstacles_number_selcted:
+            obstacles += [{'x': 177, 'y': -100}] * (self.obstacles_number_selcted - len(obstacles))
+        else :
+            obstacles = obstacles[:self.obstacles_number_selcted]
+        for i in range(len(obstacles)):
+            d = obstacles[i]
+            if 177 <= d['x'] < 254 :
+                left_obstacles += d['y'] * (len(obstacles) - i)
+            elif 254 <= d['x'] < 332 :
+                middle_obstacles += d['y'] * (len(obstacles) - i)
+            else :
+                right_obstacles += d['y'] * (len(obstacles) - i)
+        return np.array([left_obstacles, middle_obstacles, right_obstacles])
 
     def player_input(self):
         """

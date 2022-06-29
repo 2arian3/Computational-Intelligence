@@ -18,7 +18,7 @@ class NeuralNetwork:
         """
         self.number_of_layers = len(layer_sizes)
         self.biases = [
-            np.zeros([layer_sizes[i + 1]]) for i in range(len(layer_sizes) - 1)
+            np.zeros([layer_sizes[i + 1], 1]) for i in range(len(layer_sizes) - 1)
         ]
         self.weights = [
             np.random.normal(0, 1, [layer_sizes[i + 1], layer_sizes[i]]) for i in range(len(layer_sizes) - 1)
@@ -32,13 +32,14 @@ class NeuralNetwork:
         """
         return NeuralNetwork.ACTIVATION_FUNCTIONS[function_type.lower()](x)
 
-    def forward(self, x, activation_function_type='sigmoid'):
+    def forward(self, x, activation_function_type='relu'):
         """
         Receives input vector as a parameter and calculates the output vector based on weights and biases.
         :param x: Input vector which is a numpy array.
         :return: Output vector
         """
-        result = x
+        # Normalizing input vector.
+        result = (x - x.min()) / (x.max() - x.min())
         for i in range(self.number_of_layers-1):
             result = self.activation(self.weights[i] @ result + self.biases[i][0], activation_function_type)
         return result
